@@ -5,9 +5,19 @@ using namespace ariel;
 using namespace std;
 #define MAX_NUM 1000000
 
-Fraction::Fraction(int numerator, int denominator) : mone(numerator), mechane(denominator){ //main constructor
+Fraction::Fraction(int numerator, int denominator){
     if(denominator == 0){
         throw invalid_argument("Fraction can't be divided by zero");
+    }
+    int gcd = abs(__gcd(getMone,getMechane));
+    if(((this->mone < 0 && this->mechane > 0)) || (this.mone > 0 && this.mechane < 0)){
+        this->setMone (-this->getMone / gcd);
+        this->setMechane (-this->getMechane / gcd);
+    }
+    else{
+        this->setMone (numerator / gcd);
+        this->setMechane(denominator / gcd); 
+
     }
 }
 
@@ -25,6 +35,11 @@ Fraction::Fraction(float num) {
     int numerator = static_cast<int>(num * denominator);
     mone = sign * (whole * denominator + numerator);
     mechane = denominator;
+}
+
+Fraction::Fraction(const Fraction& other) noexcept :
+mone(other.getMone()),mechane(other.getMechane()){
+
 }
 
 //getters and setters
@@ -45,8 +60,9 @@ void Fraction::setMechane(int _mechane) {
 }
 
 // binary operators
-Fraction Fraction::operator+ (Fraction& other) const{
-    return Fraction(0,1);
+Fraction Fraction::operator+ (const Fraction &other) const{
+    int lcm = std::lcm (mechane, other.mechane);
+    int new_mone = (mone * lcm / mechane) +other.mone
 }
 
 Fraction Fraction::operator- (Fraction& other) const{
@@ -137,22 +153,45 @@ bool ariel::operator<= (const Fraction& f2, float f1){
 
 // friend global binary operators
 bool ariel::operator== (const Fraction& f1, const Fraction& f2){
-    return false;
-}
+        float f3 = FractionToFloat(f1);  
+        float f4 = FractionToFloat(f2);  
+        if(f3 != f4){
+            return false;
+        }
+        else{
+            return true;
+        }
+
+    }
+
 
 Fraction ariel::operator+ (float f1, const Fraction& f2){
-    return Fraction(0,1);
+    Fraction fraction(f1);
+    Fraction ans (fraction + f2);
+    return ans;
+
 }
 
 Fraction ariel::operator- (float f1, const Fraction& f2){
-    return Fraction(0,1);
+    Fraction fraction (f1);
+    Fraction ans (fraction - f2);
+    return ans;
 }
 
 Fraction ariel::operator* (float f1, const Fraction& f2){
-    return Fraction(0,1);
+    Fraction fraction (f1);
+    Fraction ans = fraction * f2;
+    return ans;
 }
 Fraction ariel::operator/ (float f1, const Fraction& f2){
-    return Fraction(0,1);
+    if(f2.getMone == 0){ 
+        throw runtime_error ("fraction cannot be divided by 0"); //beacause if the numerator of f2 is 0 the all number is 0
+    }
+    Fraction fraction (f1);
+    Fraction ans = fraction / f2;
+    return ans;
+
+
 }
 
 Fraction ariel::operator+ (const Fraction& f2, float f1){
