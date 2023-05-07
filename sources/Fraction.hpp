@@ -25,14 +25,14 @@ namespace ariel{
         
         friend float FractionToFloat(const Fraction& a);
         // binary operators
-        Fraction operator+ (Fraction& other) const;
-        Fraction operator- (Fraction& other) const;
-        Fraction operator* (Fraction& other) const;
-        Fraction operator/ (Fraction& other) const;
-        bool operator> (Fraction& other) const;
-        bool operator< (Fraction& other) const;
-        bool operator>= (Fraction& other) const;
-        bool operator<= (Fraction& other) const;
+        Fraction operator+ (Fraction &other) const;
+        Fraction operator- (Fraction &other) const;
+        Fraction operator* (Fraction &other) const;
+        Fraction operator/ (Fraction &other) const;
+        bool operator> (Fraction &other) const;
+        bool operator< (Fraction &other) const;
+        bool operator>= (Fraction &other) const;
+        bool operator<= (Fraction &other) const;
         Fraction& operator++();
         const Fraction operator++(int);
         Fraction& operator--();
