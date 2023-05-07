@@ -117,19 +117,19 @@ const Fraction Fraction::operator--(int){
 }
 
 // friend global comparison operators
-bool ariel::operator> (float f1, const Fraction& f2){
+bool ariel::operator> (float f1, const Fraction &f2){
     return false;
 }
 
-bool ariel::operator< (float f1, const Fraction& f2){
+bool ariel::operator< (float f1, const Fraction &f2){
     return false;
 }
 
-bool ariel::operator>= (float f1, const Fraction& f2){
+bool ariel::operator>= (float f1, const Fraction &f2){
     return false;
 }
 
-bool ariel::operator<= (float f1, const Fraction& f2){
+bool ariel::operator<= (float f1, const Fraction &f2){
     return false;
 }
 
@@ -137,22 +137,22 @@ bool ariel::operator> (const Fraction& f2, float f1){
     return false;
 }
 
-bool ariel::operator< (const Fraction& f2, float f1){
+bool ariel::operator< (const Fraction &f2, float f1){
     return false;
 }
 
-bool ariel::operator>= (const Fraction& f2, float f1){
+bool ariel::operator>= (const Fraction &f2, float f1){
      return false;
 
 }
 
-bool ariel::operator<= (const Fraction& f2, float f1){
+bool ariel::operator<= (const Fraction &f2, float f1){
     return false;
 
 }
 
 // friend global binary operators
-bool ariel::operator== (const Fraction& f1, const Fraction& f2){
+bool ariel::operator== (const Fraction& f1, const Fraction &f2){
         float f3 = FractionToFloat(f1);  
         float f4 = FractionToFloat(f2);  
         if(f3 != f4){
@@ -165,25 +165,25 @@ bool ariel::operator== (const Fraction& f1, const Fraction& f2){
     }
 
 
-Fraction ariel::operator+ (float f1, const Fraction& f2){
+Fraction ariel::operator+ (float f1, const Fraction &f2){
     Fraction fraction(f1);
     Fraction ans (fraction + f2);
     return ans;
 
 }
 
-Fraction ariel::operator- (float f1, const Fraction& f2){
+Fraction ariel::operator- (float f1, const Fraction &f2){
     Fraction fraction (f1);
     Fraction ans (fraction - f2);
     return ans;
 }
 
-Fraction ariel::operator* (float f1, const Fraction& f2){
+Fraction ariel::operator* (float f1, const Fraction &f2){
     Fraction fraction (f1);
     Fraction ans = fraction * f2;
     return ans;
 }
-Fraction ariel::operator/ (float f1, const Fraction& f2){
+Fraction ariel::operator/ (float f1, const Fraction &f2){
     if(f2.getMone == 0){ 
         throw runtime_error ("fraction cannot be divided by 0"); //beacause if the numerator of f2 is 0 the all number is 0
     }
@@ -194,19 +194,25 @@ Fraction ariel::operator/ (float f1, const Fraction& f2){
 
 }
 
-Fraction ariel::operator+ (const Fraction& f2, float f1){
-    return Fraction(0,1);
+Fraction ariel::operator+ (const Fraction &f2, float f1){
+    Fraction fraction (f1);
+    Fraction ans = fraction + f2;
+    return ans;
 }
 
-Fraction ariel::operator- (const Fraction& f2, float f1){
-    return Fraction(0,1);
+Fraction ariel::operator- (const Fraction &f2, float f1){
+    Fraction fraction (f1);
+    Fraction ans = f2 - fraction;
+    return ans;
 }
 
-Fraction ariel::operator* (const Fraction& f2, float f1){
-    return Fraction(0,1);
+Fraction ariel::operator* (const Fraction &f2, float f1){
+    Fraction fraction(f1);
+    Fraction ans = fraction * f2;
+    return ans;
 }
 
-Fraction ariel::operator/ (const Fraction& f2, float f1){
+Fraction ariel::operator/ (const Fraction &f2, float f1){
     return Fraction(0,1);
 }
 
