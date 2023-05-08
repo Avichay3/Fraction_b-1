@@ -180,21 +180,24 @@ bool ariel::operator<= (float f1, const Fraction &f2){
 }
 
 bool ariel::operator> (const Fraction& f2, float f1){
-    return false;
+    float f3 = FractionToFloat(f2);
+    return f1 > f3;
 }
 
 bool ariel::operator< (const Fraction &f2, float f1){
-    return false;
+    float f3 = FractionToFloat(f2);
+    return f1 < f3;
 }
 
 bool ariel::operator>= (const Fraction &f2, float f1){
-     return false;
+     float f3 = FractionToFloat(f2);
+    return f1 <= f3;
 
 }
 
 bool ariel::operator<= (const Fraction &f2, float f1){
-    return false;
-
+    float f3 = FractionToFloat(f2);
+    return f1 <= f3;
 }
 
 // friend global binary operators
