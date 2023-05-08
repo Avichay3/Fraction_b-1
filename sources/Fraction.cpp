@@ -268,19 +268,44 @@ Fraction ariel::operator/ (const Fraction &f2, float f1){
 }
 
 //input output operators
-std::ostream& ariel::operator<< (std::ostream& output, const Fraction& a){
+std::ostream& ariel::operator<< (std::ostream &output, const Fraction &a){
     // Output the fraction to the output stream
     output << a.getMone() << "/" << a.getMechane();
     return output;
 }
 
-std::istream& ariel::operator>> (std::istream& input, const Fraction& f){
-    // read the fraction from the input stream
+std::istream& ariel::operator>>(istream &input, Fraction &f){
+    int numerator = 0;
+    int denominator = 1;
+    char slash = '/';
+
+    input >> numerator;
+    if (!input.fail()){
+        input >> slash;
+        if (slash == '/'){
+            input >> denominator;
+            if (denominator != 0){
+                f.mone = numerator;
+                f.mechane = denominator;
+            }
+            else{
+                throw runtime_error("Denominator cannot be zero");
+            }
+        }
+        else
+        {
+            f.mone = numerator;
+            f.mechane = 1;
+            input.clear();
+            input.putback(slash);
+        }
+    }
     return input;
 }
 
 
-float ariel::FractionToFloat(const Fraction& a) {
+
+float ariel::FractionToFloat(const Fraction &a) {
     float fraction_float = static_cast<float>(a.getMone()) / static_cast<float>(a.getMechane());
     float rounded_float = static_cast<float>(static_cast<int>(fraction_float * 1000)) / 1000;
     return rounded_float;
