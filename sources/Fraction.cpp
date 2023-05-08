@@ -95,20 +95,48 @@ Fraction Fraction::operator/ (Fraction& other) const{
 }
 
 // comparison operators
-bool Fraction::operator> (Fraction& other) const{
-    return false;
+/*we need to convert the fractions to double and after that compare them*/
+bool Fraction::operator> (Fraction &other) const{
+    if(this->getMechane == 0 || other.getMechane == 0){
+        throw ("it is illegal to divide by 0");
+        return;
+    }
+    double d1 = double(this->getMone) / double(other.getMone);
+    double d2 = double(this->getMechane) / double(other.getMechane);
+    return d1 > d2;
 }
 
-bool Fraction::operator< (Fraction& other) const{
-    return false;
+/*we need to convert the fractions to double and after that compare them*/
+bool Fraction::operator< (Fraction &other) const{
+    if(this->getMechane == 0 || other.getMechane == 0){
+        throw ("it is illegal to divide by 0");
+        return;
+    }
+    double d1 = double(this->getMone) / double(this->getMechane);
+    double d2 = double(other.getMone) / double(other.getMechane);
+    return d1 < d2;
 }
 
-bool Fraction::operator>= (Fraction& other) const{
-    return false;
+/*we need to convert the fractions to double and after that compare them*/
+bool Fraction::operator>= (Fraction &other) const{
+    if(this->getMechane == 0 || other.getMechane == 0){
+        throw ("it is illegal to divide by 0");
+        return;
+    }
+    double d1 = double(this->getMone) / double(this->getMechane);
+    double d2 = double(other.getMone) / double(other.getMechane);
+    return d1 >= d2; 
 }
 
-bool Fraction::operator<= (Fraction& other) const{
-    return false;
+/*we need to convert the fractions to double and after that compare them*/
+bool Fraction::operator<= (Fraction &other) const{
+    if(this->getMechane == 0 || other.getMechane == 0){
+        throw ("it is illegal to divide by 0");
+        retturn;
+    }
+    double d1 = double(this->getMone) / double(this->getMechane);
+    double d2 = double(other.getMone) / double(other.getMechane);
+    return d1 <= d2; 
 }
 
 // increment and decrement operators
