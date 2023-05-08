@@ -65,19 +65,33 @@ Fraction Fraction::operator+ (const Fraction &other) const{
     int new_mone = (mone * lcm / mechane) +other.mone
 }
 
-Fraction Fraction::operator- (Fraction& other) const{
-        return Fraction(0,1);
-
+Fraction Fraction::operator- (Fraction& other) const{ // the subtruction of two fractions a/b - c/d defined as (ad - bc)/bd
+        int new_numarator = (this->getMone * other.getMechane  -  this->mechane * other.getMone);
+        int new_denominator = this->getMechane * other.getMechane;
+        Fraction f1 (new_numarator, new_denominator);
+        return f1;
 }
 
 Fraction Fraction::operator* (Fraction& other) const{
-        return Fraction(0,1);
+        if(this->getMechane == 0 || other.getMechane == 0){
+            return runtime_error("cannot be divided by 0");
+        }
+        int new_numartor = this->getMone * other.getMone;
+        int new_denominator = this->getMechane * other.getMechane;
+        Fraction f1(new_numartor,new_denominator);
+        return f1;
 
 }
 
-Fraction Fraction::operator/ (Fraction& other) const{
-        return Fraction(0,1);
-
+/*the result of (a/b) / (b/c) is ad/bc  */
+Fraction Fraction::operator/ (Fraction& other) const{ 
+        if(this->getMechane == 0 || other.getMone == 0){
+            return runtime_error("cannot be divided by 0");
+        }
+        int new_numartor = this->getMone * other.getMechane;
+        int new_denominator = this->getMechane * other.getMone;
+        Fraction f1(new_numartor, new_denominator);
+        return f1;
 }
 
 // comparison operators
