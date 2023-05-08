@@ -160,19 +160,23 @@ const Fraction Fraction::operator--(int){
 
 // friend global comparison operators
 bool ariel::operator> (float f1, const Fraction &f2){
-    return false;
+    float f3 = FractionToFloat(f2);
+    return f1 > f3;
 }
 
 bool ariel::operator< (float f1, const Fraction &f2){
-    return false;
+    float f3 = FractionToFloat(f2);
+    return f1 < f3;
 }
 
 bool ariel::operator>= (float f1, const Fraction &f2){
-    return false;
+    float f3 = FractionToFloat(f2);
+    return f1 >= f3;
 }
 
 bool ariel::operator<= (float f1, const Fraction &f2){
-    return false;
+    float f3 = FractionToFloat(f2);
+    return f1 <= f3;
 }
 
 bool ariel::operator> (const Fraction& f2, float f1){
