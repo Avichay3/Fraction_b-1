@@ -262,7 +262,9 @@ Fraction ariel::operator* (const Fraction &f2, float f1){
 }
 
 Fraction ariel::operator/ (const Fraction &f2, float f1){
-    return Fraction(0,1);
+    Fraction fraction (f1);
+    Fraction ans(f2 / fraction);
+    return ans;
 }
 
 //input output operators
