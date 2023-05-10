@@ -7,6 +7,8 @@
 using namespace ariel;
 using namespace std;
 #define MAX_NUM 1000000
+int MAX_INT = numeric_limits<int>::max();
+int MIN_INT = numeric_limits<int>::min();
 
 Fraction::Fraction(int mone, int mechane){
     if (mechane == 0){
@@ -41,7 +43,7 @@ Fraction::Fraction(float num) {
 
     Fraction::Fraction(): mone(0), mechane(1) {}; //initialization list
 
-//getters and setters
+///////////////////////////////  getters and setters
 int Fraction::getNumerator() const{
     return this->mone;
 }
@@ -60,11 +62,11 @@ void Fraction::setMechane(int _mechane) {
 
 
 
-// binary operators
+////////////////////////////////// binary operators
 Fraction Fraction::operator+(const Fraction &other) const{
     int new_mone = this->getNumerator() * other.getDenominator() + other.getNumerator() * this->getNumerator();
     int new_mechane = this->getDenominator() * other.getDenominator();
-    int gcd = std::gcd(new_mone, new_mechane);
+    int gcd = std::gcd(new_mone, new_mechane); // take the greatest common diviser
     new_mone /= gcd;
     new_mechane /= gcd;
     return Fraction{ new_mone, new_mechane };
@@ -92,9 +94,6 @@ Fraction Fraction::operator* (const Fraction& other) const{
 }
 
 
-
-
-
 /*the result of (a/b) / (c/d) is ad/bc  */
 Fraction Fraction::operator/ (const Fraction& other) const{ 
         if(other.getNumerator() == 0){
@@ -104,7 +103,7 @@ Fraction Fraction::operator/ (const Fraction& other) const{
         return *this * ans;
 }
 
-// comparison operators
+//////////////// ////////// comparison operators
 bool Fraction::operator>(const Fraction &other) const{
     return other < *this;
 }
@@ -126,7 +125,9 @@ bool Fraction::operator<=(const Fraction &other) const{
 }
 
 
-// increment and decrement operators
+
+
+///////////////////////////////////// increment and decrement operators
 Fraction& Fraction::operator++(){
     mone += mechane;
     return *this;
@@ -153,7 +154,7 @@ const Fraction Fraction::operator--(int){
 
 
 
-// friend global comparison operators
+//////////////////////////////// friend global comparison operators
 bool ariel::operator> (float f1, const Fraction &f2){
     float f3 = FractionToFloat(f2);
     return f1 > f3;
@@ -195,7 +196,10 @@ bool ariel::operator<= (const Fraction &f2, float f1){
     return f1 <= f3;
 }
 
-// friend global binary operators
+
+
+
+////////////////////////////////////// friend global binary operators
 bool ariel::operator== (const Fraction& f1, const Fraction &f2){
         float f3 = FractionToFloat(f1);  
         float f4 = FractionToFloat(f2);  
@@ -257,7 +261,7 @@ Fraction ariel::operator/ (const Fraction &f2, float f1){
     return ans;
 }
 
-//input output operators
+////////////////////////////////////////////////input output operators
 std::ostream& ariel::operator<< (std::ostream &output, const Fraction &a){
     // Output the fraction to the output stream
     output << a.getNumerator() << "/" << a.getDenominator();
@@ -294,6 +298,8 @@ std::istream& ariel::operator>>(istream &input, Fraction &f){
 
 
 
+
+// convert fraction to float
 float ariel::FractionToFloat(const Fraction &a) {
     float fraction_float = static_cast<float>(a.getNumerator()) / static_cast<float>(a.getDenominator());
     float rounded_float = static_cast<float>(static_cast<int>(fraction_float * 1000)) / 1000;

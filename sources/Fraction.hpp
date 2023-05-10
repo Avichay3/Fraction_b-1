@@ -41,8 +41,7 @@ namespace ariel{
         Fraction& operator--();
         const Fraction operator--(int);
         
-
-
+        
         /* friend functions */
         friend bool operator== (const Fraction& frac1, const Fraction& frac2);
         friend Fraction operator+ (float frac1, const Fraction& frac2);
@@ -61,8 +60,6 @@ namespace ariel{
         friend bool operator< (const Fraction& frac2, float frac1);
         friend bool operator>= (const Fraction& frac2, float frac1);
         friend bool operator<= (const Fraction& frac2, float frac1);
-
-
         
 
 
