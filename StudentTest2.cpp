@@ -7,13 +7,12 @@
 using namespace std;
 using namespace ariel;
 
-TEST_SUITE("Fraction constructors tests") {
 
+TEST_SUITE("Fraction constructors tests") {
 
     TEST_CASE("Parameterized constructor with zero numerator") {
         CHECK_NOTHROW(Fraction frac{0, 4});
         CHECK_NOTHROW(Fraction frac{0, -4});
-
     }
 
     TEST_CASE("Parameterized constructor with zero denominator") {
@@ -29,6 +28,7 @@ TEST_SUITE("Fraction constructors tests") {
         CHECK_EQ(frac2, Fraction{-1, 2});
     }
 }
+
 
 TEST_SUITE("Overloaded == operator tests") {
 
@@ -120,8 +120,8 @@ TEST_SUITE("Overloaded <= and >= operators tests") {
     }
 
     TEST_CASE("Fraction comparison with floating point numbers") {
-        Fraction frac1{1, 2};
-        Fraction frac2{3, 4};
+        Fraction frac1{1, 2}; // 1/2
+        Fraction frac2{3, 4}; // 3/4
         double float_num1 = 0.5;
         double float_num2 = 0.75;
 
