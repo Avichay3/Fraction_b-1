@@ -1,6 +1,8 @@
 #include "Fraction.hpp"
 #include <algorithm>
 #include <cmath>
+#include <numeric>   
+#include <stdexcept> 
 using namespace ariel;
 using namespace std;
 #define MAX_NUM 1000000
@@ -9,16 +11,17 @@ Fraction::Fraction(int numerator, int denominator){
     if(denominator == 0){
         throw invalid_argument("Fraction can't be divided by zero");
     }
-    int gcd = abs(__gcd(getMone,getMechane));
-    if(((this->mone < 0 && this->mechane > 0)) || (this.mone > 0 && this.mechane < 0)){
-        this->setMone (-this->getMone / gcd);
-        this->setMechane (-this->getMechane / gcd);
+    int gcd = abs(__gcd(getMone(),getMechane()));
+    if(((this->mone < 0 && this->mechane > 0)) || (this->mone > 0 && this->mechane < 0)){
+        this->setMone (-this->getMone() / gcd);
+        this->setMechane (-this->getMechane() / gcd);
     }
     else{
         this->setMone (numerator / gcd);
         this->setMechane(denominator / gcd); 
 
     }
+    
 }
 
 Fraction::Fraction(float num) {
@@ -60,82 +63,85 @@ void Fraction::setMechane(int _mechane) {
 }
 
 // binary operators
-Fraction Fraction::operator+ (const Fraction &other) const{
-    int lcm = std::lcm (mechane, other.mechane);
-    int new_mone = (mone * lcm / mechane) +other.mone
+Fraction Fraction::operator+(const Fraction& other) const
+{
+    int new_mone = this->getMone() * other.getMechane() + other.getMone() * this->getMechane();
+    int new_mechane = this->getMechane() * other.getMechane();
+    int gcd = std::gcd(new_mone, new_mechane);
+    new_mone /= gcd;
+    new_mechane /= gcd;
+    return Fraction{ new_mone, new_mechane };
 }
 
-Fraction Fraction::operator- (Fraction& other) const{ // the subtruction of two fractions a/b - c/d defined as (ad - bc)/bd
-        int new_numarator = (this->getMone * other.getMechane  -  this->mechane * other.getMone);
-        int new_denominator = this->getMechane * other.getMechane;
+
+
+Fraction Fraction::operator- (const Fraction& other) const{ // the subtruction of two fractions a/b - c/d defined as (ad - bc)/bd
+        int new_numarator = (this->getMone() * other.getMechane()  -  this->mechane * other.getMone());
+        int new_denominator = this->getMechane() * other.getMechane();
         Fraction f1 (new_numarator, new_denominator);
         return f1;
 }
 
-Fraction Fraction::operator* (Fraction& other) const{
-        if(this->getMechane == 0 || other.getMechane == 0){
-            return runtime_error("cannot be divided by 0");
+Fraction Fraction::operator* (const Fraction& other) const{
+        if(this->getMechane() == 0 || other.getMechane() == 0){
+            throw runtime_error("cannot be divided by 0");
         }
-        int new_numartor = this->getMone * other.getMone;
-        int new_denominator = this->getMechane * other.getMechane;
+        int new_numartor = this->getMone() * other.getMone();
+        int new_denominator = this->getMechane() * other.getMechane();
         Fraction f1(new_numartor,new_denominator);
         return f1;
 
 }
 
 /*the result of (a/b) / (b/c) is ad/bc  */
-Fraction Fraction::operator/ (Fraction& other) const{ 
-        if(this->getMechane == 0 || other.getMone == 0){
-            return runtime_error("cannot be divided by 0");
+Fraction Fraction::operator/ (const Fraction& other) const{ 
+        if(this->getMechane() == 0 || other.getMone() == 0){
+            throw runtime_error("cannot be divided by 0");
         }
-        int new_numartor = this->getMone * other.getMechane;
-        int new_denominator = this->getMechane * other.getMone;
+        int new_numartor = this->getMone() * other.getMechane();
+        int new_denominator = this->getMechane() * other.getMone();
         Fraction f1(new_numartor, new_denominator);
         return f1;
 }
 
 // comparison operators
 /*we need to convert the fractions to double and after that compare them*/
-bool Fraction::operator> (Fraction &other) const{
-    if(this->getMechane == 0 || other.getMechane == 0){
+bool Fraction::operator> (const Fraction &other) const{
+    if(this->getMechane() == 0 || other.getMechane() == 0){
         throw ("it is illegal to divide by 0");
-        return;
     }
-    double d1 = double(this->getMone) / double(other.getMone);
-    double d2 = double(this->getMechane) / double(other.getMechane);
+    double d1 = double(this->getMone()) / double(other.getMone());
+    double d2 = double(this->getMechane()) / double(other.getMechane());
     return d1 > d2;
 }
 
 /*we need to convert the fractions to double and after that compare them*/
-bool Fraction::operator< (Fraction &other) const{
-    if(this->getMechane == 0 || other.getMechane == 0){
+bool Fraction::operator< (const Fraction &other) const{
+    if(this->getMechane() == 0 || other.getMechane() == 0){
         throw ("it is illegal to divide by 0");
-        return;
     }
-    double d1 = double(this->getMone) / double(this->getMechane);
-    double d2 = double(other.getMone) / double(other.getMechane);
+    double d1 = double(this->getMone()) / double(this->getMechane());
+    double d2 = double(other.getMone()) / double(other.getMechane());
     return d1 < d2;
 }
 
 /*we need to convert the fractions to double and after that compare them*/
-bool Fraction::operator>= (Fraction &other) const{
-    if(this->getMechane == 0 || other.getMechane == 0){
+bool Fraction::operator>= (const Fraction &other) const{
+    if(this->getMechane() == 0 || other.getMechane() == 0){
         throw ("it is illegal to divide by 0");
-        return;
     }
-    double d1 = double(this->getMone) / double(this->getMechane);
-    double d2 = double(other.getMone) / double(other.getMechane);
+    double d1 = double(this->getMone()) / double(this->getMechane());
+    double d2 = double(other.getMone()) / double(other.getMechane());
     return d1 >= d2; 
 }
 
 /*we need to convert the fractions to double and after that compare them*/
-bool Fraction::operator<= (Fraction &other) const{
-    if(this->getMechane == 0 || other.getMechane == 0){
+bool Fraction::operator<= (const Fraction &other) const{
+    if(this->getMechane() == 0 || other.getMechane() == 0){
         throw ("it is illegal to divide by 0");
-        retturn;
     }
-    double d1 = double(this->getMone) / double(this->getMechane);
-    double d2 = double(other.getMone) / double(other.getMechane);
+    double d1 = double(this->getMone()) / double(this->getMechane());
+    double d2 = double(other.getMone()) / double(other.getMechane());
     return d1 <= d2; 
 }
 
@@ -233,7 +239,7 @@ Fraction ariel::operator* (float f1, const Fraction &f2){
     return ans;
 }
 Fraction ariel::operator/ (float f1, const Fraction &f2){
-    if(f2.getMone == 0){ 
+    if(f2.getMone() == 0){ 
         throw runtime_error ("fraction cannot be divided by 0"); //beacause if the numerator of f2 is 0 the all number is 0
     }
     Fraction fraction (f1);
@@ -285,8 +291,8 @@ std::istream& ariel::operator>>(istream &input, Fraction &f){
         if (slash == '/'){
             input >> denominator;
             if (denominator != 0){
-                f.mone = numerator;
-                f.mechane = denominator;
+                f.setMone(numerator);
+                f.setMechane(denominator);
             }
             else{
                 throw runtime_error("Denominator cannot be zero");
@@ -294,8 +300,8 @@ std::istream& ariel::operator>>(istream &input, Fraction &f){
         }
         else
         {
-            f.mone = numerator;
-            f.mechane = 1;
+            f.setMone(numerator);
+            f.setMechane(1);
             input.clear();
             input.putback(slash);
         }

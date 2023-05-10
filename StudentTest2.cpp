@@ -9,6 +9,7 @@ using namespace ariel;
 
 TEST_SUITE("Fraction constructors tests") {
 
+
     TEST_CASE("Parameterized constructor with zero numerator") {
         CHECK_NOTHROW(Fraction frac{0, 4});
         CHECK_NOTHROW(Fraction frac{0, -4});

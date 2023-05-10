@@ -28,14 +28,14 @@ namespace ariel{
         
         friend float FractionToFloat(const Fraction& a);
         // binary operators
-        Fraction operator+ (Fraction &other) const;
-        Fraction operator- (Fraction &other) const;
-        Fraction operator* (Fraction &other) const;
-        Fraction operator/ (Fraction &other) const;
-        bool operator> (Fraction &other) const;
-        bool operator< (Fraction &other) const;
-        bool operator>= (Fraction &other) const;
-        bool operator<= (Fraction &other) const;
+        Fraction operator+ (const Fraction &other) const;
+        Fraction operator- (const Fraction &other) const;
+        Fraction operator* (const Fraction &other) const;
+        Fraction operator/ (const Fraction &other) const;
+        bool operator> (const Fraction &other) const;
+        bool operator< (const Fraction &other) const;
+        bool operator>= (const Fraction &other) const;
+        bool operator<= (const Fraction &other) const;
         Fraction& operator++();
         const Fraction operator++(int);
         Fraction& operator--();
@@ -62,6 +62,6 @@ namespace ariel{
         
         // friend global IO operators
         friend std::ostream& operator<< (std::ostream& output, const Fraction& frac);
-        friend std::istream& operator>> (std::istream& input, const Fraction& frac);
+        friend std::istream& operator>> (std::istream& input,Fraction& frac);
     }; // end of Fraction class
 }
