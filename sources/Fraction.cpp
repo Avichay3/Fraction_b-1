@@ -37,9 +37,9 @@ Fraction::Fraction(float num) {
     mechane = denominator;
 }
 
-Fraction::Fraction(const Fraction& other) noexcept :
-mone(other.getMone()),mechane(other.getMechane()){
-
+Fraction::Fraction(){
+    this->setMone(1);
+    this->setMechane(1);
 }
 
 //getters and setters
