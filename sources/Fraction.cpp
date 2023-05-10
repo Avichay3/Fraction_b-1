@@ -39,10 +39,7 @@ Fraction::Fraction(float num) {
     mechane = denominator;
 }
 
-Fraction::Fraction(){
-    this->setMone(1);
-    this->setMechane(1);
-}
+    Fraction::Fraction(): mone(0), mechane(1) {}; //initialization list
 
 //getters and setters
 int Fraction::getNumerator() const{
@@ -60,6 +57,8 @@ void Fraction::setMone(int _mone) {
 void Fraction::setMechane(int _mechane) {
     this->mechane = _mechane;
 }
+
+
 
 // binary operators
 Fraction Fraction::operator+(const Fraction &other) const{

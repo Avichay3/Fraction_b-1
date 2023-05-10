@@ -26,7 +26,7 @@ namespace ariel{
         void setMechane(int) ;
 
         
-        friend float FractionToFloat(const Fraction& a);
+        friend float FractionToFloat(const Fraction& abc);
         // binary operators
         Fraction operator+ (const Fraction &other) const;
         Fraction operator- (const Fraction &other) const;
