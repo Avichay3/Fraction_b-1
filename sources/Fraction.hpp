@@ -16,6 +16,9 @@ namespace ariel{
         // Constructor for convert float to fraction
         Fraction(float num);
 
+        //default constructor
+        Fraction(); 
+
         /* getters and setters to the members */
         int getMone() const;
         int getMechane() const;
