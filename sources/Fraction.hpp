@@ -42,7 +42,11 @@ namespace ariel{
         const Fraction operator--(int);
         
         
-        /* friend functions */
+        /* friend functions
+        for have access to the private and protected members of the class.
+        Help us when performing calculations or comparisons involving Fraction objects.
+        In other words,allows us define operations involving fractions and other types (like float in our case).
+         */
         friend bool operator== (const Fraction& frac1, const Fraction& frac2);
         friend Fraction operator+ (float frac1, const Fraction& frac2);
         friend Fraction operator- (float frac1, const Fraction& frac2);
